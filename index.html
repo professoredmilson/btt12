@@ -83,6 +83,18 @@
         <h3>Log de Mensagens:</h3>
         <div id="log" style="text-align: left; height: 150px; overflow-y: auto; background: white; padding: 10px; border-radius: 5px;"></div>
     </div>
+    <!-- Adicione isto dentro do container de controles -->
+<div id="controls" class="hidden">
+    <div id="ledStatus" style="margin: 10px 0; padding: 10px; border-radius: 5px; background: #e8eaf6; color: #283593;">
+        Status do LED: ⚫ DESLIGADO
+    </div>
+    <button id="btnOn">🔴 Ligar LED</button>
+    <button id="btnOff">⚫ Desligar LED</button>
+    <button id="btnStatus">📊 Verificar Status</button>
+    <div style="margin-top: 10px; font-size: 12px; color: #666;">
+        Dica: Use também os botões A/B no Microbit
+    </div>
+</div>
 
     <script src="app.js"></script>
 </body>
