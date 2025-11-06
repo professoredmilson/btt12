@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle LED - Microbit</title>
     <style>
+        /* Seus estilos anteriores */
         body {
             font-family: Arial, sans-serif;
             max-width: 600px;
@@ -13,51 +14,13 @@
             text-align: center;
         }
         
-        .container {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 10px;
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
             margin: 20px 0;
-        }
-        
-        button {
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-        }
-        
-        #btnConnect {
-            background: #4CAF50;
-            color: white;
-        }
-        
-        #btnOn {
-            background: #2196F3;
-            color: white;
-        }
-        
-        #btnOff {
-            background: #f44336;
-            color: white;
-        }
-        
-        #status {
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        
-        .connected {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .disconnected {
-            background: #f8d7da;
-            color: #721c24;
         }
         
         .hidden {
@@ -68,6 +31,42 @@
 <body>
     <h1>Controle de LED - Microbit</h1>
     
+    <div id="httpsWarning" class="warning">
+        <h3>⚠️ Aviso de Segurança</h3>
+        <p>Esta aplicação requer HTTPS ou localhost para funcionar.</p>
+        <p><strong>Para usar:</strong></p>
+        <ol style="text-align: left;">
+            <li>Baixe os arquivos e execute localmente</li>
+            <li>Ou use um dos serviços recomendados</li>
+        </ol>
+        <button onclick="showLocalInstructions()">Instruções para Executar Localmente</button>
+    </div>
+    
+    <div id="localInstructions" class="hidden">
+        <h3>🚀 Como Executar Localmente</h3>
+        <div style="text-align: left; background: #f8f9fa; padding: 15px; border-radius: 5px;">
+            <h4>Opção 1 - Python (Mais Fácil):</h4>
+            <code>
+                # Execute no terminal/prompt:<br>
+                python -m http.server 8000<br>
+                # Depois acesse: http://localhost:8000
+            </code>
+            
+            <h4>Opção 2 - Node.js:</h4>
+            <code>
+                npx http-server<br>
+                # Ou instale: npm install -g http-server<br>
+                # Depois: http-server
+            </code>
+            
+            <h4>Opção 3 - PHP:</h4>
+            <code>
+                php -S localhost:8000
+            </code>
+        </div>
+    </div>
+
+    <!-- Seu conteúdo original aqui -->
     <div class="container">
         <button id="btnConnect">Conectar ao Microbit</button>
         <div id="status" class="disconnected">Desconectado</div>
@@ -83,19 +82,20 @@
         <h3>Log de Mensagens:</h3>
         <div id="log" style="text-align: left; height: 150px; overflow-y: auto; background: white; padding: 10px; border-radius: 5px;"></div>
     </div>
-    <!-- Adicione isto dentro do container de controles -->
-<div id="controls" class="hidden">
-    <div id="ledStatus" style="margin: 10px 0; padding: 10px; border-radius: 5px; background: #e8eaf6; color: #283593;">
-        Status do LED: ⚫ DESLIGADO
-    </div>
-    <button id="btnOn">🔴 Ligar LED</button>
-    <button id="btnOff">⚫ Desligar LED</button>
-    <button id="btnStatus">📊 Verificar Status</button>
-    <div style="margin-top: 10px; font-size: 12px; color: #666;">
-        Dica: Use também os botões A/B no Microbit
-    </div>
-</div>
 
+    <script>
+        // Verificar se está em HTTPS
+        if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+            document.getElementById('httpsWarning').classList.remove('hidden');
+        } else {
+            document.getElementById('httpsWarning').classList.add('hidden');
+        }
+        
+        function showLocalInstructions() {
+            document.getElementById('localInstructions').classList.remove('hidden');
+        }
+    </script>
+    
     <script src="app.js"></script>
 </body>
 </html>
